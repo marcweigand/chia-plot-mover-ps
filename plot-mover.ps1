@@ -24,13 +24,13 @@ while($true){
             PercentComplete = 0
         }
         Write-Progress @progress
-        Move-Item -Path $sourceFile -Destination $destinationFile
+        Copy-Item -Path $sourceFile -Destination $destinationFile
+        Remove-Item -Path $sourceFile
         $transferred = $fileSize
         $progress.Status = "$transferred of $fileSize transferred"
         $progress.PercentComplete = 100
         Write-Progress @progress
         Write-Host (Get-Date -Format "yyyy-MM-dd HH:mm:ss") "- Finished moving $plotFile to $mostSpace"
-        # Manually complete the progress bar
         Write-Progress -Activity $progress.Activity -Completed
     }
     Start-Sleep -Seconds 600
